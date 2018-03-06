@@ -198,7 +198,7 @@ export default function undoable (reducer, rawConfig = {}) {
         if (config.initTypes.some((actionType) => actionType === action.type)) {
           debug.log('reset history due to init action')
           debug.end(initialState)
-          return initialState
+          return initialState || history
         }
 
         if (history._latestUnfiltered === res) {
