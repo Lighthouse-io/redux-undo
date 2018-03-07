@@ -684,6 +684,21 @@ function runTests (label, { undoableConfig = {}, initialStoreState, testConfig }
         expect(clearedState.present).to.equal(incrementedState.present)
       })
     })
+    describe('Reset History', () => {
+      let resetedState
+
+      before('perform a resetHistory action', () => {
+        const resetHistoryType = undoableConfig && undoableConfig.resetHistoryType
+        const actionType = resetHistoryType && Array.isArray(resetHistoryType) && resetHistoryType.length ? {type: resetHistoryType[0]} : ActionCreators.resetHistory()
+        resetedState = mockUndoableReducer(incrementedState, actionType)
+      })
+
+      it('should reset all', () => {
+        expect(resetedState.past.length).to.equal(0)
+        expect(resetedState.future.length).to.equal(0)
+        expect(resetedState.present.length).to.equal(undefined)
+      })
+    })
     describe('running getSlices', () => {
       if (testConfig && testConfig.checkSlices) {
         const initialState = {
