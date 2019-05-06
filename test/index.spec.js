@@ -10,6 +10,9 @@ runTests('Never skip reducer', {
     neverSkipReducer: true
   }
 })
+runTests('Null state', {
+  initialStoreState: null
+})
 runTests('No Init types', {
   undoableConfig: {
     initTypes: []

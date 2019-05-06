@@ -11,7 +11,8 @@ export function parseActions (rawActions, defaultValue = []) {
 
 // isHistory helper: check for a valid history object
 export function isHistory (history) {
-  return typeof history.present !== 'undefined' &&
+  return history &&
+    typeof history.present !== 'undefined' &&
     typeof history.future !== 'undefined' &&
     typeof history.past !== 'undefined' &&
     Array.isArray(history.future) &&
